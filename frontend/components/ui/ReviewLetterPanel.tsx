@@ -41,26 +41,26 @@ export default function ReviewLetterPanel({ reviewId, departmentId, initialLette
   const copyText = () => navigator.clipboard.writeText(letter);
 
   return (
-    <div className="border-t border-[#E5E7EB] shrink-0" style={{ maxHeight: expanded ? '340px' : '44px' }}>
+    <div className="border-t border-[#D8E0EA] shrink-0" style={{ maxHeight: expanded ? '340px' : '48px' }}>
       {/* Header bar */}
       <div
-        className="h-11 flex items-center px-3 gap-3 bg-[#F2F4F6] border-b border-[#E5E7EB] cursor-pointer"
+        className="h-12 flex items-center px-3 gap-3 bg-white border-b border-[#D8E0EA] cursor-pointer"
         onClick={() => setExpanded(!expanded)}
       >
-        <span className="text-[11px] font-bold uppercase tracking-wide text-[#374151] flex-1">
-          {expanded ? '▼' : '▶'} Review Letter Draft — {dept.shortName} Department
+        <span className="text-[11px] font-black uppercase tracking-[0.16em] text-[#475569] flex-1">
+          {expanded ? 'v' : '>'} Review Letter Draft - {dept.shortName} Department
         </span>
         <div className="flex gap-2" onClick={e => e.stopPropagation()}>
           <button
             onClick={generateLetter}
             disabled={isGenerating}
-            className="text-[10px] font-bold uppercase tracking-wide px-3 py-1 border border-[#E5E7EB] bg-white hover:bg-[#F2F4F6] disabled:opacity-50"
+            className="rounded-md text-[10px] font-bold uppercase tracking-wide px-3 py-1.5 border border-[#D8E0EA] bg-white hover:bg-[#F8FAFC] disabled:opacity-50"
             style={{ color: dept.colorPrimary }}
           >
             {isGenerating ? 'GENERATING...' : letter ? 'REGENERATE' : 'GENERATE LETTER'}
           </button>
           {letter && (
-            <button onClick={copyText} className="text-[10px] font-bold uppercase text-[#6B7280] px-2 py-1 border border-[#E5E7EB] bg-white hover:bg-[#F2F4F6]">
+            <button onClick={copyText} className="rounded-md text-[10px] font-bold uppercase text-[#64748B] px-2 py-1.5 border border-[#D8E0EA] bg-white hover:bg-[#F8FAFC]">
               COPY
             </button>
           )}

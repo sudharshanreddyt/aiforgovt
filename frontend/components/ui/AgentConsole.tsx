@@ -79,16 +79,16 @@ export default function AgentConsole({ appId, autoStart = false, onComplete }: P
   };
 
   return (
-    <div className="bg-[#0D2340] text-white p-4 font-mono">
+    <div className="bg-[#102A43] text-white p-5 font-mono">
       <div className="flex items-center justify-between mb-4">
-        <div className="text-[11px] uppercase tracking-widest font-bold text-white/80">
-          AI Review Engine — {status === 'complete' ? 'COMPLETE' : status === 'running' ? 'RUNNING' : 'READY'}
+        <div className="text-[11px] uppercase tracking-[0.2em] font-black text-white/80">
+          AI Review Engine - {status === 'complete' ? 'COMPLETE' : status === 'running' ? 'RUNNING' : 'READY'}
         </div>
         <div className="flex gap-2">
           {status === 'idle' && (
             <button
               onClick={startReview}
-              className="text-[10px] font-bold uppercase tracking-wide px-3 py-1 border border-white/30 hover:bg-white/10"
+              className="rounded-md text-[10px] font-bold uppercase tracking-wide px-3 py-1.5 border border-white/30 hover:bg-white/10"
             >
               RUN AI REVIEW
             </button>
@@ -96,7 +96,7 @@ export default function AgentConsole({ appId, autoStart = false, onComplete }: P
           {(status === 'running' || status === 'complete') && (
             <button
               onClick={resetAndReplay}
-              className="text-[10px] font-bold uppercase tracking-wide px-3 py-1 border border-white/30 hover:bg-white/10"
+              className="rounded-md text-[10px] font-bold uppercase tracking-wide px-3 py-1.5 border border-white/30 hover:bg-white/10"
             >
               REPLAY
             </button>
@@ -123,7 +123,7 @@ export default function AgentConsole({ appId, autoStart = false, onComplete }: P
             </div>
           )}
 
-          <div className="space-y-3">
+          <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
             {(agents.length > 0 ? agents : DEPT_ORDER.map(d => ({ department_id: d, status: 'queued', checks_complete: 0, checks_total: 6, current_action: 'Waiting...' }))).map((agent) => {
               const dept = DEPARTMENTS[agent.department_id as keyof typeof DEPARTMENTS];
               if (!dept) return null;
@@ -131,9 +131,9 @@ export default function AgentConsole({ appId, autoStart = false, onComplete }: P
               const isComplete = agent.status === 'complete';
 
               return (
-                <div key={agent.department_id}>
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-[11px] uppercase tracking-wider w-32" style={{ color: dept.colorPrimary }}>
+                <div key={agent.department_id} className="rounded-md border border-white/10 bg-white/8 p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[11px] uppercase tracking-wider w-32 font-black" style={{ color: dept.colorPrimary }}>
                       {dept.shortName} Agent
                     </span>
                     <span className="text-[10px] text-white/50 flex-1 mx-3 truncate">{agent.current_action}</span>
@@ -141,9 +141,9 @@ export default function AgentConsole({ appId, autoStart = false, onComplete }: P
                       {isComplete ? 'COMPLETE' : `${agent.checks_complete}/${agent.checks_total}`}
                     </span>
                   </div>
-                  <div className="h-2 bg-white/10 w-full">
+                  <div className="h-2.5 bg-white/10 w-full rounded-full overflow-hidden">
                     <div
-                      className="h-full transition-all duration-500"
+                      className="h-full transition-all duration-500 rounded-full"
                       style={{ width: `${pct}%`, backgroundColor: isComplete ? '#34D399' : dept.colorPrimary }}
                     />
                   </div>

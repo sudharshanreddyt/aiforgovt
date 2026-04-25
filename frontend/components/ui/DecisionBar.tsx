@@ -36,12 +36,12 @@ export default function DecisionBar({ reviewId, departmentId, onDecision, hasAct
 
   return (
     <>
-      <div className="flex items-center h-12 px-3 gap-3 border-t border-[#E5E7EB] bg-[#F2F4F6] shrink-0">
-        <span className="text-[11px] font-bold uppercase tracking-widest text-[#374151] mr-auto">Department Decision</span>
+      <div className="flex items-center h-14 px-3 gap-3 border-t border-[#D8E0EA] bg-[#F8FAFC] shrink-0">
+        <span className="text-[11px] font-black uppercase tracking-[0.18em] text-[#475569] mr-auto">Department Decision</span>
         <button
           disabled={!hasActioned}
           onClick={() => openModal('approved')}
-          className="text-[11px] font-bold uppercase px-4 py-1.5 border-2 disabled:opacity-40"
+          className="rounded-md bg-white text-[11px] font-black uppercase px-4 py-2 border-2 disabled:opacity-40"
           style={{ borderColor: '#059669', color: '#059669' }}
         >
           Approve
@@ -49,7 +49,7 @@ export default function DecisionBar({ reviewId, departmentId, onDecision, hasAct
         <button
           disabled={!hasActioned}
           onClick={() => openModal('conditional')}
-          className="text-[11px] font-bold uppercase px-4 py-1.5 border-2 disabled:opacity-40"
+          className="rounded-md bg-white text-[11px] font-black uppercase px-4 py-2 border-2 disabled:opacity-40"
           style={{ borderColor: '#D97706', color: '#D97706' }}
         >
           Conditional
@@ -57,7 +57,7 @@ export default function DecisionBar({ reviewId, departmentId, onDecision, hasAct
         <button
           disabled={!hasActioned}
           onClick={() => openModal('rejected')}
-          className="text-[11px] font-bold uppercase px-4 py-1.5 border-2 disabled:opacity-40"
+          className="rounded-md bg-white text-[11px] font-black uppercase px-4 py-2 border-2 disabled:opacity-40"
           style={{ borderColor: '#DC2626', color: '#DC2626' }}
         >
           Reject
@@ -66,24 +66,24 @@ export default function DecisionBar({ reviewId, departmentId, onDecision, hasAct
 
       {showModal && (
         <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-          <div className="bg-white border border-[#E5E7EB] p-6 w-[480px] shadow-xl">
+          <div className="bg-white rounded-lg border border-[#D8E0EA] p-6 w-[480px] shadow-xl">
             <div className="text-[13px] font-bold uppercase tracking-wide mb-3">
               Confirm {pendingDecision.toUpperCase()}
             </div>
             <textarea
-              className="w-full h-28 border border-[#E5E7EB] p-3 text-[12px] resize-none outline-none mb-3"
+              className="w-full h-28 rounded-md border border-[#D8E0EA] p-3 text-[12px] resize-none outline-none mb-3 focus:border-[#155E75]"
               placeholder="Decision note (optional)..."
               value={note}
               onChange={e => setNote(e.target.value)}
             />
             <div className="flex gap-2 justify-end">
-              <button onClick={() => setShowModal(false)} className="text-[11px] uppercase px-4 py-2 border border-[#E5E7EB]">
+              <button onClick={() => setShowModal(false)} className="rounded-md text-[11px] uppercase px-4 py-2 border border-[#D8E0EA]">
                 Cancel
               </button>
               <button
                 onClick={submit}
                 disabled={submitting}
-                className="text-[11px] font-bold uppercase px-4 py-2 text-white disabled:opacity-50"
+                className="rounded-md text-[11px] font-bold uppercase px-4 py-2 text-white disabled:opacity-50"
                 style={{ backgroundColor: pendingDecision === 'approved' ? '#059669' : pendingDecision === 'rejected' ? '#DC2626' : '#D97706' }}
               >
                 {submitting ? 'SUBMITTING...' : `Confirm ${pendingDecision.toUpperCase()}`}

@@ -20,17 +20,17 @@ interface Props {
 
 export default function ActivityLog({ events = DEMO_EVENTS }: Props) {
   return (
-    <div className="border border-[#E5E7EB] bg-white">
-      <div className="px-3 py-2 bg-[#0D2340] text-white text-[11px] font-bold uppercase tracking-widest">
-        Activity Log
+    <div className="pf-card overflow-hidden">
+      <div className="border-b border-[#D8E0EA] bg-white px-5 py-4">
+        <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#64748B]">Activity log</div>
       </div>
-      <div className="divide-y divide-[#E5E7EB]">
+      <div className="divide-y divide-[#EDF1F5]">
         {events.map((ev, i) => {
           const dept = ev.departmentId ? DEPARTMENTS[ev.departmentId as keyof typeof DEPARTMENTS] : null;
           return (
-            <div key={i} className="flex gap-3 px-3 py-2" style={{ borderLeft: `3px solid ${dept?.colorPrimary || '#0D2340'}` }}>
-              <span className="font-mono text-[10px] text-[#9CA3AF] shrink-0 w-36">{ev.timestamp}</span>
-              <span className="text-[12px] text-[#374151]">{ev.message}</span>
+            <div key={i} className="flex gap-3 px-5 py-3" style={{ borderLeft: `4px solid ${dept?.colorPrimary || '#102A43'}` }}>
+              <span className="font-mono text-[10px] text-[#94A3B8] shrink-0 w-36">{ev.timestamp}</span>
+              <span className="text-[12px] text-[#475569]">{ev.message}</span>
             </div>
           );
         })}

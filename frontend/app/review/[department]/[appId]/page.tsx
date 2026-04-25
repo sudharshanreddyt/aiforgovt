@@ -68,7 +68,7 @@ export default function ReviewerCockpit() {
   if (!dept) return <div className="p-8 text-red-600">Invalid department: {departmentId}</div>;
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden">
+    <div className="flex flex-col h-screen overflow-hidden bg-[#EEF3F7]">
       <DepartmentMasthead departmentId={departmentId} reviewerName={review?.reviewerName || 'Plan Examiner'} />
 
       <div className="flex flex-1 overflow-hidden">
@@ -76,18 +76,34 @@ export default function ReviewerCockpit() {
 
         <div className="flex flex-col flex-1 overflow-hidden">
           {/* Breadcrumb */}
-          <div className="px-4 py-2 text-[11px] text-[#6B7280] bg-white border-b border-[#E5E7EB] shrink-0">
-            Queue / <span className="font-mono">{appId}</span> / {dept.shortName} Review
+          <div className="px-4 py-2 text-[11px] text-[#64748B] bg-white border-b border-[#D8E0EA] shrink-0">
+            Queue / <span className="font-mono font-bold">{appId}</span> / {dept.shortName} Review Cockpit
           </div>
 
           {/* Application header strip */}
-          <div className="flex items-center px-4 h-12 bg-[#F2F4F6] border-b border-[#E5E7EB] shrink-0">
-            <span className="font-mono text-[12px] text-[#6B7280] mr-3">{appId}</span>
-            <span className="text-[13px] text-[#374151] mr-3">{address || '2247 18th St NW, Washington, DC'}</span>
-            <span className="text-[13px] text-[#374151] mr-auto">
-              {projectType ? projectType.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) : 'Change of Use'}
-            </span>
-            <Badge variant={appStatus || 'dept_review'} />
+          <div className="flex items-center gap-4 px-4 h-16 bg-[#F8FAFC] border-b border-[#D8E0EA] shrink-0">
+            <div className="h-9 w-1.5 rounded-full" style={{ backgroundColor: dept.colorPrimary }} />
+            <div className="min-w-0">
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-[12px] font-black text-[#475569]">{appId}</span>
+                <Badge variant={appStatus || 'dept_review'} />
+              </div>
+              <div className="mt-1 truncate text-[13px] font-bold text-[#172033]">
+                {address || '2247 18th St NW, Washington, DC'} - {projectType ? projectType.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) : 'Change of Use'}
+              </div>
+            </div>
+            <div className="ml-auto hidden grid-cols-3 gap-2 lg:grid">
+              {[
+                [findings.filter(f => f.severity === 'critical').length, 'Critical'],
+                [findings.filter(f => f.severity === 'warning').length, 'Warnings'],
+                [findings.filter(f => f.reviewerAction !== 'pending').length, 'Actioned'],
+              ].map(([value, label]) => (
+                <div key={label} className="min-w-[86px] rounded-md border border-[#D8E0EA] bg-white px-3 py-2 text-center">
+                  <div className="text-[17px] font-black" style={{ color: dept.colorDark }}>{value}</div>
+                  <div className="text-[9px] uppercase tracking-[0.16em] text-[#94A3B8]">{label}</div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Department tab switcher */}
@@ -97,9 +113,9 @@ export default function ReviewerCockpit() {
           {loading ? (
             <LoadingState message="Loading findings and plans..." />
           ) : (
-            <div className="flex flex-1 overflow-hidden">
+            <div className="flex flex-1 overflow-hidden bg-[#E2E8F0]">
               {/* PDF Viewer — 55% */}
-              <div className="flex-[55] overflow-hidden border-r border-[#E5E7EB]">
+              <div className="flex-[56] overflow-hidden border-r border-[#CBD5E1]">
                 <PDFViewer
                   pdfUrl="/sample-plan.pdf"
                   findings={findings}
@@ -110,7 +126,7 @@ export default function ReviewerCockpit() {
               </div>
 
               {/* Findings panel — 45% */}
-              <div className="flex-[45] flex flex-col overflow-hidden">
+              <div className="flex-[44] flex flex-col overflow-hidden bg-white">
                 <FindingsPanel
                   findings={findings}
                   departmentId={departmentId}

@@ -37,13 +37,16 @@ export default function PDFViewer({ pdfUrl, findings, departmentId, selectedFind
   const findingsOnPage = findings.filter(f => f.boundingBox?.page === currentPage);
 
   return (
-    <div className="flex flex-col h-full overflow-hidden bg-[#4A4A4A]">
+    <div className="flex flex-col h-full overflow-hidden bg-[#243447]">
       {/* Controls bar */}
-      <div className="flex items-center gap-2 px-3 py-2 bg-[#2D2D2D] border-b border-[#1A1A1A] shrink-0">
+      <div className="flex items-center gap-2 px-3 py-2 bg-[#111827] border-b border-black/30 shrink-0">
+        <span className="mr-2 rounded-md px-2 py-1 text-[10px] font-black uppercase tracking-wide text-white" style={{ backgroundColor: dept.colorPrimary }}>
+          Evidence viewer
+        </span>
         <button
           onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
           disabled={currentPage <= 1}
-          className="text-[11px] font-bold uppercase text-white/70 px-2 py-1 border border-white/20 hover:border-white/50 disabled:opacity-30"
+          className="rounded-md text-[11px] font-bold uppercase text-white/70 px-2 py-1 border border-white/20 hover:border-white/50 disabled:opacity-30"
         >
           PREV
         </button>
@@ -53,20 +56,20 @@ export default function PDFViewer({ pdfUrl, findings, departmentId, selectedFind
         <button
           onClick={() => setCurrentPage(p => Math.min(numPages, p + 1))}
           disabled={currentPage >= numPages}
-          className="text-[11px] font-bold uppercase text-white/70 px-2 py-1 border border-white/20 hover:border-white/50 disabled:opacity-30"
+          className="rounded-md text-[11px] font-bold uppercase text-white/70 px-2 py-1 border border-white/20 hover:border-white/50 disabled:opacity-30"
         >
           NEXT
         </button>
         <div className="ml-auto flex items-center gap-1">
-          <button onClick={() => setScale(s => Math.max(0.5, s - 0.1))} className="text-[11px] font-bold text-white/70 px-2 py-1 border border-white/20 hover:border-white/50">-</button>
+          <button onClick={() => setScale(s => Math.max(0.5, s - 0.1))} className="rounded-md text-[11px] font-bold text-white/70 px-2 py-1 border border-white/20 hover:border-white/50">-</button>
           <span className="text-[11px] text-white/60 font-mono w-12 text-center">{Math.round(scale * 100)}%</span>
-          <button onClick={() => setScale(s => Math.min(2.5, s + 0.1))} className="text-[11px] font-bold text-white/70 px-2 py-1 border border-white/20 hover:border-white/50">+</button>
-          <button onClick={() => setScale(1.0)} className="text-[11px] font-bold text-white/70 px-2 py-1 border border-white/20 hover:border-white/50 ml-1">FIT</button>
+          <button onClick={() => setScale(s => Math.min(2.5, s + 0.1))} className="rounded-md text-[11px] font-bold text-white/70 px-2 py-1 border border-white/20 hover:border-white/50">+</button>
+          <button onClick={() => setScale(1.0)} className="rounded-md text-[11px] font-bold text-white/70 px-2 py-1 border border-white/20 hover:border-white/50 ml-1">FIT</button>
         </div>
       </div>
 
       {/* PDF content */}
-      <div className="flex-1 overflow-auto flex justify-center py-4">
+      <div className="flex-1 overflow-auto flex justify-center py-5">
         <div className="relative inline-block">
           <Document file={pdfUrl} onLoadSuccess={onLoadSuccess} loading={<div className="text-white/50 p-8 text-[13px]">Loading PDF...</div>} error={<NoPDF />}>
             <Page
@@ -98,7 +101,7 @@ export default function PDFViewer({ pdfUrl, findings, departmentId, selectedFind
                   top: `${(bbox.y / pageHeight) * renderedHeight}px`,
                   width: 28,
                   height: 28,
-                  borderRadius: '50%',
+                  borderRadius: '8px',
                   backgroundColor: color,
                   display: 'flex',
                   alignItems: 'center',

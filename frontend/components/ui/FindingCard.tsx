@@ -35,20 +35,20 @@ export default function FindingCard({ finding, departmentId, pinNumber, isSelect
 
   return (
     <div
-      className={`border border-[#E5E7EB] bg-white mb-2 transition-all cursor-pointer ${isSelected ? 'shadow-md' : ''}`}
+      className={`mb-3 cursor-pointer rounded-lg border border-[#D8E0EA] bg-white transition-all ${isSelected ? 'shadow-lg' : 'shadow-sm hover:shadow-md'}`}
       style={{
-        borderLeft: `4px solid ${SEVERITY_BORDER[finding.severity] || '#6B7280'}`,
-        outline: isSelected ? `1px solid ${dept.colorPrimary}` : undefined,
+        borderLeft: `5px solid ${SEVERITY_BORDER[finding.severity] || '#6B7280'}`,
+        outline: isSelected ? `2px solid ${dept.colorPrimary}` : undefined,
       }}
       onClick={handleSelect}
     >
       {/* Header (always visible) */}
-      <div className="flex items-center justify-between px-3 py-2 bg-[#F2F4F6] border-b border-[#E5E7EB]">
+      <div className="flex items-center justify-between px-3 py-2 bg-[#F8FAFC] border-b border-[#EDF1F5] rounded-tr-lg">
         <div className="flex items-center gap-2">
           <Badge variant={finding.severity} small />
-          <span className="font-mono text-[11px] text-[#6B7280]">{finding.id}</span>
+          <span className="font-mono text-[11px] font-bold text-[#64748B]">{finding.id}</span>
         </div>
-        <div className="flex items-center gap-2 text-[11px] text-[#6B7280]">
+        <div className="flex items-center gap-2 text-[11px] text-[#64748B]">
           <span
             className="inline-flex items-center justify-center w-5 h-5 rounded-full text-white text-[10px] font-bold"
             style={{ backgroundColor: dept.colorPrimary }}
@@ -61,9 +61,9 @@ export default function FindingCard({ finding, departmentId, pinNumber, isSelect
 
       <div className="px-3 py-2">
         <div className="flex items-center justify-between">
-          <p className="text-[13px] font-semibold text-[#111827] leading-snug">{finding.title}</p>
+          <p className="text-[14px] font-black text-[#172033] leading-snug">{finding.title}</p>
           <button
-            className="ml-2 text-[11px] text-[#6B7280] shrink-0"
+            className="ml-2 rounded-md px-2 py-1 text-[11px] text-[#64748B] hover:bg-[#F1F5F9] shrink-0"
             onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
           >
             {expanded ? '▲' : '▼'}
@@ -74,7 +74,7 @@ export default function FindingCard({ finding, departmentId, pinNumber, isSelect
       {/* Expanded body */}
       {expanded && (
         <div className="px-3 pb-3" onClick={(e) => e.stopPropagation()}>
-          <p className="text-[12px] text-[#374151] mb-3 leading-relaxed">{finding.description}</p>
+          <p className="text-[12px] text-[#475569] mb-3 leading-relaxed">{finding.description}</p>
 
           <CodeCitation
             authority={finding.codeAuthority}
@@ -85,34 +85,34 @@ export default function FindingCard({ finding, departmentId, pinNumber, isSelect
 
           {finding.suggestedFix && (
             <div className="mt-2">
-              <div className="text-[10px] uppercase tracking-wider text-[#6B7280] mb-1">Suggested Correction</div>
-              <p className="text-[12px] text-[#374151]">{finding.suggestedFix}</p>
+              <div className="text-[10px] uppercase tracking-wider text-[#64748B] mb-1 font-black">Suggested Correction</div>
+              <p className="rounded-md bg-[#F8FAFC] p-3 text-[12px] text-[#475569] ring-1 ring-[#E2E8F0]">{finding.suggestedFix}</p>
             </div>
           )}
 
-          <div className="mt-2 text-[10px] uppercase tracking-wider text-[#6B7280]">
-            AI Confidence: <span className="font-bold text-[#374151]">{finding.aiConfidence?.toUpperCase()}</span>
+          <div className="mt-3 text-[10px] uppercase tracking-wider text-[#64748B]">
+            AI Confidence: <span className="font-black text-[#334155]">{finding.aiConfidence?.toUpperCase()}</span>
           </div>
 
           {/* Action buttons */}
-          <div className="flex border border-[#E5E7EB] mt-3">
+          <div className="grid grid-cols-3 gap-2 mt-3">
             <button
               onClick={() => onActionUpdate('accepted')}
-              className="flex-1 h-9 text-[11px] font-bold uppercase tracking-wide border-r border-[#E5E7EB] transition-colors"
+              className="h-9 rounded-md border border-[#D8E0EA] text-[11px] font-black uppercase tracking-wide transition-colors"
               style={actionColor('accepted')}
             >
               Accept
             </button>
             <button
               onClick={() => setShowOverride(!showOverride)}
-              className="flex-1 h-9 text-[11px] font-bold uppercase tracking-wide border-r border-[#E5E7EB] transition-colors"
+              className="h-9 rounded-md border border-[#D8E0EA] text-[11px] font-black uppercase tracking-wide transition-colors"
               style={actionColor('overridden')}
             >
               Override
             </button>
             <button
               onClick={() => setShowNote(!showNote)}
-              className="flex-1 h-9 text-[11px] font-bold uppercase tracking-wide transition-colors"
+              className="h-9 rounded-md border border-[#D8E0EA] text-[11px] font-black uppercase tracking-wide transition-colors"
               style={actionColor('added')}
             >
               Add Note
@@ -120,10 +120,10 @@ export default function FindingCard({ finding, departmentId, pinNumber, isSelect
           </div>
 
           {showOverride && (
-            <div className="mt-2 border border-[#E5E7EB] p-2">
+            <div className="mt-2 rounded-md border border-[#D8E0EA] bg-[#F8FAFC] p-2">
               <div className="text-[10px] uppercase tracking-wider text-[#6B7280] mb-1">Reviewer Override Note</div>
               <textarea
-                className="w-full text-[12px] border border-[#E5E7EB] p-2 resize-none h-20 outline-none focus:border-[#9CA3AF]"
+                className="w-full rounded-md text-[12px] border border-[#D8E0EA] p-2 resize-none h-20 outline-none focus:border-[#155E75]"
                 placeholder="AI finding is incorrect because..."
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
@@ -131,7 +131,7 @@ export default function FindingCard({ finding, departmentId, pinNumber, isSelect
               <div className="flex gap-2 mt-1">
                 <button
                   onClick={() => { onActionUpdate('overridden', inputText); setShowOverride(false); }}
-                  className="text-[11px] font-bold uppercase px-3 py-1"
+                  className="rounded-md text-[11px] font-bold uppercase px-3 py-1"
                   style={{ backgroundColor: dept.colorPrimary, color: 'white' }}
                 >
                   Submit Override
@@ -142,10 +142,10 @@ export default function FindingCard({ finding, departmentId, pinNumber, isSelect
           )}
 
           {showNote && (
-            <div className="mt-2 border border-[#E5E7EB] p-2">
+            <div className="mt-2 rounded-md border border-[#D8E0EA] bg-[#F8FAFC] p-2">
               <div className="text-[10px] uppercase tracking-wider text-[#6B7280] mb-1">Add Reviewer Note</div>
               <textarea
-                className="w-full text-[12px] border border-[#E5E7EB] p-2 resize-none h-20 outline-none focus:border-[#9CA3AF]"
+                className="w-full rounded-md text-[12px] border border-[#D8E0EA] p-2 resize-none h-20 outline-none focus:border-[#155E75]"
                 placeholder="Additional observation..."
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
@@ -153,7 +153,7 @@ export default function FindingCard({ finding, departmentId, pinNumber, isSelect
               <div className="flex gap-2 mt-1">
                 <button
                   onClick={() => { onActionUpdate('added', inputText); setShowNote(false); }}
-                  className="text-[11px] font-bold uppercase px-3 py-1"
+                  className="rounded-md text-[11px] font-bold uppercase px-3 py-1"
                   style={{ backgroundColor: dept.colorPrimary, color: 'white' }}
                 >
                   Save Note

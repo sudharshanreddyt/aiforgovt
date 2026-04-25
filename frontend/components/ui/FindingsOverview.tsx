@@ -16,9 +16,10 @@ export default function FindingsOverview({ findings }: Props) {
 
   return (
     <>
-      <div className="border border-[#E5E7EB] bg-white">
-        <div className="px-3 py-2 bg-[#0D2340] text-white text-[11px] font-bold uppercase tracking-widest">
-          Findings Overview
+      <div className="pf-card overflow-hidden">
+        <div className="border-b border-[#D8E0EA] bg-white px-5 py-4">
+          <div className="text-[11px] font-black uppercase tracking-[0.2em] text-[#64748B]">Findings overview</div>
+          <p className="mt-1 text-[12px] text-[#64748B]">Consolidated across departments.</p>
         </div>
         <div className="p-4">
           <div className="grid grid-cols-4 gap-4 text-center mb-4">
@@ -28,20 +29,20 @@ export default function FindingsOverview({ findings }: Props) {
               { label: 'Info', val: counts.info, color: '#1E40AF' },
               { label: 'Pass', val: counts.pass, color: '#065F46' },
             ].map(({ label, val, color }) => (
-              <div key={label}>
-                <div className="text-[28px] font-bold" style={{ color }}>{val}</div>
-                <div className="text-[10px] uppercase tracking-wider text-[#9CA3AF]">{label}</div>
+              <div key={label} className="rounded-md bg-[#F8FAFC] px-2 py-3 ring-1 ring-[#E2E8F0]">
+                <div className="text-[28px] font-black" style={{ color }}>{val}</div>
+                <div className="text-[10px] uppercase tracking-wider text-[#94A3B8]">{label}</div>
               </div>
             ))}
           </div>
           {actionableCount > 0 && (
-            <p className="text-[12px] text-[#374151] mb-3">
+            <p className="text-[12px] leading-5 text-[#475569] mb-3">
               {actionableCount} {actionableCount === 1 ? 'issue requires' : 'issues require'} your attention before the permit can be issued.
             </p>
           )}
           <button
             onClick={() => setShowModal(true)}
-            className="w-full text-[11px] font-bold uppercase tracking-wide py-2 border border-[#E5E7EB] hover:bg-[#F2F4F6]"
+            className="pf-button w-full rounded-md border border-[#D8E0EA] py-2 text-[11px] font-black uppercase tracking-wide text-[#475569] hover:bg-[#F8FAFC]"
           >
             View Full AI Findings Report
           </button>
@@ -50,8 +51,8 @@ export default function FindingsOverview({ findings }: Props) {
 
       {showModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white w-full max-w-3xl max-h-[90vh] flex flex-col">
-            <div className="flex items-center justify-between px-4 py-3 bg-[#0D2340] text-white shrink-0">
+          <div className="bg-white w-full max-w-3xl max-h-[90vh] flex flex-col rounded-lg overflow-hidden shadow-2xl">
+            <div className="flex items-center justify-between px-4 py-3 bg-[#102A43] text-white shrink-0">
               <span className="text-[13px] font-bold uppercase tracking-wide">AI Findings Report — APP-2026-4471</span>
               <button onClick={() => setShowModal(false)} className="text-white/70 hover:text-white text-[18px]">x</button>
             </div>

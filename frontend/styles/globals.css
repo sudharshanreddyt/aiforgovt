@@ -5,12 +5,17 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&family=Public+Sans:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --color-navy: #0D2340;
-  --color-ink: #111827;
-  --color-slate: #374151;
-  --color-steel: #6B7280;
-  --color-rule: #E5E7EB;
-  --color-surface: #F2F4F6;
+  --color-navy: #102A43;
+  --color-civic: #155E75;
+  --color-ink: #172033;
+  --color-slate: #475569;
+  --color-steel: #64748B;
+  --color-rule: #D8E0EA;
+  --color-surface: #EEF3F7;
+  --color-panel: #FFFFFF;
+  --color-warm: #F59E0B;
+  --shadow-soft: 0 18px 45px rgba(16, 42, 67, 0.11);
+  --shadow-panel: 0 10px 26px rgba(16, 42, 67, 0.08);
 }
 
 * {
@@ -18,7 +23,9 @@
 }
 
 body {
-  background: var(--color-surface);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0) 260px),
+    var(--color-surface);
   font-family: 'Public Sans', system-ui, sans-serif;
   color: var(--color-ink);
 }
@@ -32,6 +39,40 @@ body {
 ::-webkit-scrollbar-track { background: #F3F4F6; }
 ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
+
+.pf-card {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(216, 224, 234, 0.92);
+  border-radius: 8px;
+  box-shadow: var(--shadow-panel);
+}
+
+.pf-button {
+  border-radius: 6px;
+  transition: transform 150ms ease, box-shadow 150ms ease, background-color 150ms ease, border-color 150ms ease;
+}
+
+.pf-button:hover {
+  transform: translateY(-1px);
+}
+
+.pf-grid-bg {
+  background-image:
+    linear-gradient(rgba(16, 42, 67, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 42, 67, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.pf-glass {
+  background: rgba(255, 255, 255, 0.84);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.64);
+}
+
+.pf-focus-ring:focus {
+  outline: 2px solid rgba(21, 94, 117, 0.35);
+  outline-offset: 2px;
+}
 
 /* react-pdf canvas */
 .react-pdf__Page__canvas {

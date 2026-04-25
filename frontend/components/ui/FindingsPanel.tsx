@@ -39,11 +39,11 @@ export default function FindingsPanel({ findings, departmentId, selectedFindingI
   return (
     <div className="flex flex-col h-full overflow-hidden">
       {/* Summary stats */}
-      <div className="px-3 py-2 border-b border-[#E5E7EB] bg-[#F2F4F6] shrink-0">
-        <div className="text-[10px] uppercase tracking-widest font-bold text-[#6B7280] mb-1">
-          Findings Summary — {dept.shortName} Department
+      <div className="px-4 py-3 border-b border-[#D8E0EA] bg-[#F8FAFC] shrink-0">
+        <div className="text-[10px] uppercase tracking-[0.2em] font-black text-[#64748B] mb-2">
+          Findings Summary - {dept.shortName} Department
         </div>
-        <div className="grid grid-cols-5 gap-1 text-center">
+        <div className="grid grid-cols-5 gap-2 text-center">
           {[
             { label: 'Critical', val: counts.critical, color: '#B91C1C' },
             { label: 'Warning', val: counts.warning, color: '#92400E' },
@@ -51,21 +51,21 @@ export default function FindingsPanel({ findings, departmentId, selectedFindingI
             { label: 'Pass', val: counts.pass, color: '#065F46' },
             { label: 'Pending', val: pending, color: '#6B7280' },
           ].map(({ label, val, color }) => (
-            <div key={label}>
-              <div className="text-[16px] font-bold" style={{ color }}>{val}</div>
-              <div className="text-[9px] uppercase tracking-wide text-[#9CA3AF]">{label}</div>
+            <div key={label} className="rounded-md bg-white py-2 ring-1 ring-[#E2E8F0]">
+              <div className="text-[16px] font-black" style={{ color }}>{val}</div>
+              <div className="text-[9px] uppercase tracking-wide text-[#94A3B8]">{label}</div>
             </div>
           ))}
         </div>
       </div>
 
       {/* Severity tabs */}
-      <div className="flex border-b border-[#E5E7EB] shrink-0">
+      <div className="flex border-b border-[#D8E0EA] shrink-0 bg-white">
         {TABS.map(({ key, label, count }) => (
           <button
             key={key}
             onClick={() => setActiveTab(key)}
-            className="flex-1 py-2 text-[10px] font-bold uppercase tracking-wide transition-colors"
+            className="flex-1 py-3 text-[10px] font-black uppercase tracking-wide transition-colors"
             style={{
               borderBottom: activeTab === key ? `2px solid ${dept.colorPrimary}` : '2px solid transparent',
               color: activeTab === key ? dept.colorPrimary : '#6B7280',
@@ -78,7 +78,7 @@ export default function FindingsPanel({ findings, departmentId, selectedFindingI
       </div>
 
       {/* Findings list */}
-      <div className="flex-1 overflow-y-auto p-2">
+      <div className="flex-1 overflow-y-auto bg-[#F8FAFC] p-3">
         {filtered.length === 0 ? (
           <div className="text-[12px] text-[#9CA3AF] text-center py-8">No findings in this category.</div>
         ) : (
