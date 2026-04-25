@@ -1,0 +1,24 @@
+{
+  "id": "APP-2026-4471",
+  "applicant_id": "APPL-001",
+  "applicant_name": "Maria L. Chen",
+  "applicant_email": "maria.chen@sunrisecafe.com",
+  "jurisdiction": "dc",
+  "address": "2247 18th St NW, Washington, DC 20009",
+  "project_type": "restaurant_change_of_use",
+  "project_description": "Change of use from retail (Group M) to restaurant (Group A-2). Interior renovation of 2,800 sf on ground floor. Addition of full commercial kitchen, Type I hood, and 12-seat exterior patio.",
+  "status": "dept_review",
+  "submitted_at": "2026-04-24T14:30:00",
+  "parcel_data": {
+    "address": "2247 18th St NW, Washington, DC 20009",
+    "ssl": "2563-0058",
+    "zoningDistrict": "MU-4",
+    "overlayDistricts": ["Arts Overlay"],
+    "heightLimitFt": 50,
+    "floodZone": null,
+    "historicStatus": null,
+    "ward": 1,
+    "latitude": 38.9162,
+    "longitude": -77.0377
+  }
+}
